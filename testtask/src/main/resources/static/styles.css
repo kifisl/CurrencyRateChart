@@ -2,21 +2,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-family: Helvetica,sans-serif;
+    min-height: 100vh;
+    font-family: Helvetica, sans-serif;
     text-align: center;
 }
 
-#currency{
+#currency {
     display: inline-block;
     text-align: left;
-    padding: 40px;
+    padding: 20px;
     background-color: #f2f2f2;
     border-radius: 5px;
+    max-width: 400px;
+    width: 90%;
+    box-sizing: border-box;
 }
 
 .group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 label {
@@ -27,12 +30,13 @@ label {
 
 select,
 input {
-    width: 350px;
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 button {
@@ -44,12 +48,14 @@ button {
     background-color: #2a9e13;
     color: #fff;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
-#error-message{
+#error-message {
     color: #960018;
 }
 
-.rateChart{
-    width: 400px;
+.rateChart {
+    max-width: 100%;
+    width: 100%;
 }
