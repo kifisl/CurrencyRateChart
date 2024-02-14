@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Currency</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Официальный курс валюты</h1>
+        <div id="currency">
+            <div class="group">
+                <label for="currency-select">Валюта:</label>
+                <select id="currency-select" name="currency" required>
+                    <option value="" disabled selected hidden>Валюта</option>
+                    <option th:each="currency : ${currencies}" th:value="${currency.id}" th:text="${currency.abbreviation}"></option>
+                </select>
+            </div>
+
+            <div class="group">
+                <label for="start-date">Начало периода:</label>
+                <input type="date" id="start-date" name="startDate" max="2020-07-08" required>
+            </div>
+
+            <div class="group">
+                <label for="end-date">Конец периода:</label>
+                <input type="date" id="end-date" name="endDate" max="2020-07-08" required>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+            <button type="submit" onclick="getRate()" >Получить курс</button>
+        </div>
+    </div>
+    <script>
+        var selectElement = document.getElementById("currency-select");
+        var startDateElement = document.getElementById("start-date");
+        var endDateElement = document.getElementById("end-date");
+        var errorMessageElement = document.getElementById("error-message");
+  
+        function getRate() {
+            var selectedCurrencyId = selectElement.value;
+            var startDate = startDateElement.value;
+            var endDate = endDateElement.value;
+
+            if (!selectedCurrencyId && !startDate && !endDate ) {
+            
+            errorMessageElement.textContent = "Все поля должны быть заполнены!";
+            }else if (startDate >= endDate) {
+                errorMessageElement.textContent = "Начальная дата должна быть ранее конечной!";
+            }else{
+                var url = "/rate?id=" + selectedCurrencyId + "&startDate=" + startDate + "&endDate=" + endDate;
+            window.location.href = url;
+            }
+        };
+    </script>
+</body>
+</html>

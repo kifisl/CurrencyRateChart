@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Chart</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body>
+    <div id="rateChart"></div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var timestamps = /*[(${timestamps})]*/ [];
+        var rates = /*[(${rates})]*/ [];
+    
+        var dates = timestamps.map(function(timestamp) {
+            return new Date(timestamp);
+        });
+
+        /*]]>*/
+
+        var formattedDates = dates.map(function(date) {
+            return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'numeric', year: 'numeric' });
+        });
+        var data = {
+            chart: {
+                type: 'line',
+                width: 900,
+                height: 500,
+            },
+            title: {
+                text: 'График официального курса валюты'
+            },
+            xAxis: {
+                type: 'category',
+                categories: formattedDates,
+                labels: {
+                    rotation: -45,
+                    style: {                        
+                        fontFamily: 'Helvetica, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Rate'
+                },
+                labels: {
+                    style: {
+                        fontFamily: 'Helvetica, sans-serif'
+                    }
+                }
+            },
+            series: [{
+                name: 'Rate',
+                data: rates,
+                color: '#DC143C'
+            }],
+            accessibility: {
+                enabled: false
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            Highcharts.chart('rateChart', data);
+        });
+    </script>
+</body>
+
+</html>
