@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 @Controller
-public class HomeController {
+public class CurrencyController {
 
     @GetMapping("/")
     public String homePage(Model model) throws JsonMappingException, JsonProcessingException {
